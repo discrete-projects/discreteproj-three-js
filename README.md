@@ -1,2 +1,2 @@
-# discreteproj-three-js
-THREE.js Experiements
+# THREE.js Experiements
+## A repo for various experiements with THREE.js

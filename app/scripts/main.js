@@ -1,14 +1,33 @@
-console.log('\'Allo \'Allo!');
+console.log('sup world');
+
+/* CREATE A NEW THREE.JS SCENE */
 var scene = new THREE.Scene();
+
+/* CREATE A NEW THREE.JS CAMERA */
+/* The PerspectiveCamera Method has a large field of view */
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000)
 
-/* We want depth so we will pick a PerspectiveCamera. Bigger the field of view the more we can see */
-
+/* RENDER OUR THREE.JS SCENE */
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/*GAME LOGIC*/
+/* ADD EVENT LISTENER */
+/* This allows the page to be resizeable */
+window.addEventListener('resize', function(){
+  console.log('resize');
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  renderer.setSize( width, height );
+  camera.aspect= width/height;
+  camera.updateProjectionMatrix();
+});
+
+/* ADD CONTROSL TO SCENE  */
+
+var controls = new THREE.OrbitControls( camera, renderer.domElement);
+
+/* SCENE LOGIC */
 var update = function() {
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.005;
@@ -38,5 +57,6 @@ var GameLoop = function() {
   update();
   render();
 };
+
 
 GameLoop();

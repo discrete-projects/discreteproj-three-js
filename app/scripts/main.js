@@ -24,8 +24,32 @@ window.addEventListener('resize', function(){
 });
 
 /* ADD CONTROSL TO SCENE  */
-
 var controls = new THREE.OrbitControls( camera, renderer.domElement);
+
+/* CREATE THE SHAPE */
+var geometry = new THREE.BoxGeometry(1.2, 1.2, 1.2);
+var cubeMaterials = [
+  new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide}), /* RIGHT SIDE */
+
+  // new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/1.jpg'), side: THREE.DoubleSide}), /* RIGHT SIDE */
+  new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/2.jpg'), side: THREE.DoubleSide}), /* LEFT SIDE */
+  new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/3.jpg'), side: THREE.DoubleSide}), /* TOP SIDE */
+  new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/4.jpg'), side: THREE.DoubleSide}), /* BOTTOM SIDE */
+  new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/5.jpg'), side: THREE.DoubleSide}), /* FRONT SIDE */
+  new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../images/6.jpg'), side: THREE.DoubleSide})  /* BACK SIDE */
+];
+
+/* CREATE A MATERIAL COLOR OR IMAGE TEXTURE */
+var material = new THREE.MeshFaceMaterial(cubeMaterials);
+// var material = new THREE.MeshBasicMaterial({
+//   color: 0xFFFFFF,
+//   wireframe: true
+// });
+
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+camera.position.z = 3;
+
 
 /* SCENE LOGIC */
 var update = function() {
@@ -38,18 +62,6 @@ var render = function() {
   renderer.render(scene, camera);
 };
 
-/* CREATE THE SHAPE */
-var geometry = new THREE.BoxGeometry(1, 1, 1);
-
-/* CREATE A MATERIAL COLOR OR IMAGE TEXTURE */
-var material = new THREE.MeshBasicMaterial({
-  color: 0xFFFFFF,
-  wireframe: true
-});
-
-var cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
-camera.position.z = 3;
 
 /* RUN GAME LOOP (UPDATE, RENDER, REPEAT) */
 var GameLoop = function() {
